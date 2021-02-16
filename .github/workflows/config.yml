@@ -9,10 +9,21 @@ on:
 jobs:
   build:
     runs-on: macOS-latest
+    env:
+      working_directory_demo_app: ./alon
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_12.4.app
     - name: Xcode version
       run: /usr/bin/xcodebuild -version
+    - name: Build Sample App
+      run: |
+        xcodebuild \
+        -project alon.xcodeproj \
+        -scheme alon \
+        -sdk iphonesimulator \
+        -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
+        build
+      working_directory: ${{env.working_directory_demo_app}}
