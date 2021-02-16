@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: macOS-latest
     env:
-      working_directory_demo_app: ./alon
+      working-directory-demo-app: ./alon
 
     steps:
     - uses: actions/checkout@v2
@@ -26,4 +26,4 @@ jobs:
         -sdk iphonesimulator \
         -destination 'platform=iOS Simulator,name=iPhone 11 Pro' \
         build
-      working_directory: ${{env.working_directory_demo_app}}
+      working-directory: ${{env.working-directory-demo-app}}
