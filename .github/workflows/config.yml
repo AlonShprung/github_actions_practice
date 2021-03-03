@@ -10,11 +10,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_12.4.app
+
     - name: Xcode version
       run: /usr/bin/xcodebuild -version
+
     - name: Version
       run: |
         version="${GITHUB_REF#"refs/tags/"}"
-        echo "${version}"
+        PREVIOUS_VERSION=`cat file.podspec | grep "s.version" | cut -d "=" -f2 | cut -d \" -f2`
+        sed -ie "s/\([[:space:]]*s\.version[[:space:]]*= \"\)${PREVIOUS_VERSION}/\1$version/" file.podspec
