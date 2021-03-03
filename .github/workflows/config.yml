@@ -19,6 +19,7 @@ jobs:
 
     - name: Version
       run: |
-        version="${GITHUB_REF#"refs/tags/"}"
+        NEW_VERSION="${GITHUB_REF#"refs/tags/"}"
         PREVIOUS_VERSION=`cat file.podspec | grep "s.version" | cut -d "=" -f2 | cut -d \" -f2`
-        sed -ie "s/\([[:space:]]*s\.version[[:space:]]*= \"\)${PREVIOUS_VERSION}/\1$version/" file.podspec
+        echo $PREVIOUS_VERSION
+        sed -ie "s/\([[:space:]]*s\.version[[:space:]]*= \"\)${PREVIOUS_VERSION}/\1$NEW_VERSION/" file.podspec
