@@ -28,6 +28,6 @@ jobs:
         git config user.email "boris@minutemedia.com"
 
         git add file.podspec
-        git commit -am "Bump version in file.podspec"
+        git commit -m "Bump version in file.podspec"
 
-        git push
+        git push -u origin main
