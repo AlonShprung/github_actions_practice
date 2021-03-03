@@ -15,4 +15,6 @@ jobs:
     - name: Xcode version
       run: /usr/bin/xcodebuild -version
     - name: REF
-      run: echo "$GITHUB_REF"
+      run: |
+        version = ${$GITHUB_REF#refs\/tags\/}
+        echo "${version}"
