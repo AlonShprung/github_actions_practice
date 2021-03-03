@@ -9,7 +9,7 @@ jobs:
     runs-on: macOS-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
 
     - name: Select Xcode
       run: sudo xcode-select -switch /Applications/Xcode_12.4.app
@@ -23,3 +23,11 @@ jobs:
         PREVIOUS_VERSION=`cat file.podspec | grep "s.version" | cut -d "=" -f2 | cut -d \" -f2`
         echo $PREVIOUS_VERSION
         sed -ie "s/\([[:space:]]*s\.version[[:space:]]*= \"\)${PREVIOUS_VERSION}/\1$NEW_VERSION/" file.podspec
+
+        git config user.name "Boris Kalim"
+        git config user.email "boris@minutemedia.com"
+
+        git add file.podspec
+        git commit -am "Bump version in file.podspec"
+
+        git push
