@@ -51,3 +51,7 @@ jobs:
               "prerelease": false}' \
         https://api.github.com/repos/AlonCherrypick/github_actions_practice/releases?access_token=$GITHUB_TOKEN
         
+    - name: Delete branch
+      run: |
+        BRANCH_NAME="${GITHUB_REF#"refs/heads/"}"
+        git push origin --delete $BRANCH_NAME
