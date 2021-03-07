@@ -1,1 +1,1 @@
-  s.version             = "1.0.9"
+  s.version             = "1.0.10"
