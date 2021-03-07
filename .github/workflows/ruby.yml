@@ -31,6 +31,9 @@ jobs:
         VERSION="${GITHUB_REF#"refs/heads/release/"}"
         git branch
         
+        git config user.name "Alon Shprung"
+        git config user.email "alon@cherrypick-consulting.com"
+        
         git commit --allow-empty -m "version $VERSION"
         
         git push
