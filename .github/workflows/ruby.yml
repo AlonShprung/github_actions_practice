@@ -26,6 +26,25 @@ jobs:
         VERSION="${GITHUB_REF#"refs/heads/release/"}"
         echo $VERSION
         
-    - name: branch
+    - name: push commit to master
       run: |
+        VERSION="${GITHUB_REF#"refs/heads/release/"}"
         git branch
+        
+        git commit --allow-empty -m "version $VERSION"
+        
+        git push
+        
+    - name: create release
+      env:
+          GITHUB_TOKEN: ${{ secrets.GH_API_TOKEN }}
+      run: |
+        VERSION="${GITHUB_REF#"refs/heads/release/"}"
+        curl --data '{"tag_name": "'$VERSION'",
+              "target_commitish": "main",
+              "name": "'$VERSION'",
+              "body": "Release of version '$VERSION'",
+              "draft": true,
+              "prerelease": false}' \
+        https://api.github.com/repos/AlonCherrypick/github_actions_practice/releases?access_token=$GITHUB_TOKEN
+        
