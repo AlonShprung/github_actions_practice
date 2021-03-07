@@ -19,5 +19,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: ref
-      run: echo $GITHUB_REF
+    - name: version
+      run: |
+        VERSION="${GITHUB_REF#"refs/heads/release/"}"
+        echo $VERSION
+        
+    - name: branch
+      run: |
+        git branch
+        git checkout main
+        git branch
